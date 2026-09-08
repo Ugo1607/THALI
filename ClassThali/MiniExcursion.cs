@@ -54,10 +54,10 @@ namespace ClassThali
         /// <param name="uneDuree">duree de l'etape à ajouter</param>
         public void AjouteEtape(string uneDescription, int uneDuree)
         {
-            Etape lEtape = new Etape(1, uneDescription, uneDuree);
+            Etape lEtape = new Etape(lesEtapes.Count+1, uneDescription, uneDuree);
             this.lesEtapes.Add(lEtape);
         }
-
+        
         /// <summary>
         /// Retourne la durée totale de la mini-excursion en minutes. Cette durée est 
         /// la somme des durées en minutes des étapes constituant la mini-excursion.
@@ -65,9 +65,15 @@ namespace ClassThali
         /// <returns></returns>
         public int DonneDureePrevue()
         {
-            return 0;
-        }
+            int dureeTotale = 0;
 
+           for (int i = 0; i < this.lesEtapes.Count; i++)
+            {
+                dureeTotale += this.lesEtapes[i].getDureePrevue();
+            }
+            return dureeTotale;
+        }
+         
         /// <summary>
         /// Retourne la durée totale de la mini-excursion sous la forme hh:mm
         /// </summary>
@@ -75,8 +81,8 @@ namespace ClassThali
         public string DonneDureePrevuehhmm()
         {
             int dureeMin = this.DonneDureePrevue();
-            int mm = dureeMin / 60;
-            int hh = dureeMin % 60;
+            int hh = dureeMin / 60;
+            int mm = dureeMin % 60;
             return hh.ToString("00") + ":" + mm.ToString("00");
         }
 
